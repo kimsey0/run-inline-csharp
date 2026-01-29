@@ -1,0 +1,45 @@
+{
+    "manifestVersion": 1,
+    "id": "run-inline-csharp",
+    "name": "Run Inline C#",
+    "version": "1.0.0",
+    "publisher": "JacobBundgaard",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "description": "Run C# code directly in your pipeline using .NET 10's file-based programs feature. Supports inline scripts and .cs files.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.svg"
+    },
+    "files": [
+        {
+            "path": "runInlineCSharpTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "run-inline-csharp-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "runInlineCSharpTask"
+            }
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/your-repo/run-inline-csharp"
+    },
+    "content": {
+        "details": {
+            "path": "README.md"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "run-inline-csharp-extension",
+  "version": "1.0.0",
+  "description": "Azure DevOps extension for running inline C# code",
+  "scripts": {
+    "build": "cd runInlineCSharpTask && npm install && npm run build",
+    "test": "cd runInlineCSharpTask && npm test",
+    "package": "tfx extension create --manifest-globs vss-extension.json"
+  },
+  "keywords": [
+    "azure-devops",
+    "extension",
+    "csharp",
+    "dotnet"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "tfx-cli": "^0.16.0"
+  }
+}

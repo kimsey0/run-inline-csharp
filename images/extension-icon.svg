@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <rect width="128" height="128" rx="16" fill="#512BD4"/>
+  <text x="64" y="80" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">C#</text>
+  <path d="M20 30 L40 30 L40 35 L25 35 L25 50 L20 50 Z" fill="#68217A" opacity="0.5"/>
+  <path d="M88 78 L108 78 L108 98 L103 98 L103 83 L88 83 Z" fill="#68217A" opacity="0.5"/>
+</svg>

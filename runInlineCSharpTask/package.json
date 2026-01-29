@@ -1,0 +1,29 @@
+{
+  "name": "run-inline-csharp-task",
+  "version": "1.0.0",
+  "description": "Azure DevOps task for running inline C# code",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha tests/_suite.js",
+    "pretest": "tsc"
+  },
+  "keywords": [
+    "azure-devops",
+    "pipeline",
+    "csharp",
+    "dotnet"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "azure-pipelines-task-lib": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^20.0.0",
+    "@types/q": "^1.5.0",
+    "mocha": "^10.0.0",
+    "typescript": "^5.0.0"
+  }
+}
