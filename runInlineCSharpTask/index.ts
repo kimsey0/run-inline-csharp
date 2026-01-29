@@ -7,7 +7,7 @@ import * as os from 'os';
 async function run(): Promise<void> {
     try {
         // Get inputs
-        const scriptType = tl.getInput('scriptType', true)!;
+        const scriptType = tl.getInput('scriptType', false) || 'inline';
         const script = tl.getInput('script', false);
         const scriptPath = tl.getPathInput('scriptPath', false);
         const args = tl.getInput('arguments', false) || '';

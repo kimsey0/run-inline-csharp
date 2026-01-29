@@ -25,7 +25,7 @@
             "name": "scriptType",
             "type": "pickList",
             "label": "Script Type",
-            "required": true,
+            "required": false,
             "defaultValue": "inline",
             "helpMarkDown": "Select whether to run inline C# code or a .cs file.",
             "options": {

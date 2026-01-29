@@ -18,14 +18,12 @@ stages:
           - task: RunInlineCSharp@1
             displayName: 'Hello World'
             inputs:
-              scriptType: 'inline'
               script: |
                 Console.WriteLine("Hello from inline C#!");
 
           - task: RunInlineCSharp@1
             displayName: 'Test with Arguments'
             inputs:
-              scriptType: 'inline'
               script: |
                 Console.WriteLine($"Received {args.Length} arguments:");
                 foreach (var arg in args)
@@ -37,7 +35,6 @@ stages:
           - task: RunInlineCSharp@1
             displayName: 'Test Environment Variables'
             inputs:
-              scriptType: 'inline'
               script: |
                 var myVar = Environment.GetEnvironmentVariable("MY_VAR");
                 var debug = Environment.GetEnvironmentVariable("DEBUG");
@@ -56,7 +53,6 @@ stages:
           - task: RunInlineCSharp@1
             displayName: 'Test LINQ and Modern C#'
             inputs:
-              scriptType: 'inline'
               script: |
                 var numbers = Enumerable.Range(1, 10);
                 Console.WriteLine($"Sum of 1-10: {numbers.Sum()}");
@@ -69,7 +65,6 @@ stages:
           - task: RunInlineCSharp@1
             displayName: 'Test Async/Await'
             inputs:
-              scriptType: 'inline'
               script: |
                 Console.WriteLine("Starting async operation...");
                 await Task.Delay(100);
@@ -78,7 +73,6 @@ stages:
           - task: RunInlineCSharp@1
             displayName: 'Test Setting Pipeline Variable'
             inputs:
-              scriptType: 'inline'
               script: |
                 var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
                 Console.WriteLine($"##vso[task.setvariable variable=TestTimestamp]{timestamp}");
@@ -122,7 +116,6 @@ stages:
             displayName: 'Test Script That Fails (Expected)'
             continueOnError: true
             inputs:
-              scriptType: 'inline'
               script: |
                 Console.WriteLine("This script will exit with error code 1");
                 Environment.Exit(1);
