@@ -1,0 +1,131 @@
+trigger:
+  - master
+  - main
+
+stages:
+  - stage: Test
+    displayName: 'Test RunInlineCSharp Task'
+    jobs:
+      - job: TestInlineScript
+        displayName: 'Test Inline Scripts'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10'
+            inputs:
+              version: '10.x'
+              includePreviewVersions: true
+
+          - task: RunInlineCSharp@1
+            displayName: 'Hello World'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                Console.WriteLine("Hello from inline C#!");
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test with Arguments'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                Console.WriteLine($"Received {args.Length} arguments:");
+                foreach (var arg in args)
+                {
+                    Console.WriteLine($"  - {arg}");
+                }
+              arguments: 'arg1 arg2 "argument with spaces"'
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test Environment Variables'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                var myVar = Environment.GetEnvironmentVariable("MY_VAR");
+                var debug = Environment.GetEnvironmentVariable("DEBUG");
+                Console.WriteLine($"MY_VAR = {myVar}");
+                Console.WriteLine($"DEBUG = {debug}");
+
+                if (myVar != "hello" || debug != "true")
+                {
+                    Console.Error.WriteLine("Environment variables not set correctly!");
+                    Environment.Exit(1);
+                }
+              environmentVariables: |
+                MY_VAR=hello
+                DEBUG=true
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test LINQ and Modern C#'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                var numbers = Enumerable.Range(1, 10);
+                Console.WriteLine($"Sum of 1-10: {numbers.Sum()}");
+                Console.WriteLine($"Average: {numbers.Average()}");
+
+                // Test modern C# features
+                int[] data = [1, 2, 3, 4, 5];
+                Console.WriteLine($"Collection expression: [{string.Join(", ", data)}]");
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test Async/Await'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                Console.WriteLine("Starting async operation...");
+                await Task.Delay(100);
+                Console.WriteLine("Async operation completed!");
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test Setting Pipeline Variable'
+            inputs:
+              scriptType: 'inline'
+              script: |
+                var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss");
+                Console.WriteLine($"##vso[task.setvariable variable=TestTimestamp]{timestamp}");
+                Console.WriteLine($"Set TestTimestamp to: {timestamp}");
+
+          - script: echo Pipeline variable TestTimestamp = $(TestTimestamp)
+            displayName: 'Verify Pipeline Variable'
+
+      - job: TestFileScript
+        displayName: 'Test File-based Scripts'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10'
+            inputs:
+              version: '10.x'
+              includePreviewVersions: true
+
+          - task: RunInlineCSharp@1
+            displayName: 'Run Script File'
+            inputs:
+              scriptType: 'filePath'
+              scriptPath: '$(Build.SourcesDirectory)/test-scripts/hello.cs'
+
+          - task: RunInlineCSharp@1
+            displayName: 'Run Script with Arguments'
+            inputs:
+              scriptType: 'filePath'
+              scriptPath: '$(Build.SourcesDirectory)/test-scripts/echo-args.cs'
+              arguments: 'first second third'
+
+      - job: TestErrorHandling
+        displayName: 'Test Error Handling'
+        steps:
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10'
+            inputs:
+              version: '10.x'
+              includePreviewVersions: true
+
+          - task: RunInlineCSharp@1
+            displayName: 'Test Script That Fails (Expected)'
+            continueOnError: true
+            inputs:
+              scriptType: 'inline'
+              script: |
+                Console.WriteLine("This script will exit with error code 1");
+                Environment.Exit(1);
+
+          - script: echo "Pipeline continued after expected failure"
+            displayName: 'Verify Pipeline Continues'
