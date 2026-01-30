@@ -71,6 +71,24 @@ stages:
                 Console.WriteLine("Async operation completed!");
 
           - task: RunInlineCSharp@1
+            displayName: 'Test NuGet Package'
+            inputs:
+              script: |
+                #:package Newtonsoft.Json@13.0.3
+
+                using Newtonsoft.Json;
+
+                var obj = new { Name = "Test", Value = 42 };
+                var json = JsonConvert.SerializeObject(obj);
+                Console.WriteLine($"Serialized JSON: {json}");
+
+                if (!json.Contains("Test") || !json.Contains("42"))
+                {
+                    Console.Error.WriteLine("JSON serialization failed!");
+                    Environment.Exit(1);
+                }
+
+          - task: RunInlineCSharp@1
             displayName: 'Test Setting Pipeline Variable'
             inputs:
               script: |
