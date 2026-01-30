@@ -90,9 +90,9 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 
 | Input | Type | Required | Default | Description |
 |-------|------|----------|---------|-------------|
-| `scriptType` | pickList | Yes | `inline` | Script type: "inline" or "filePath" |
-| `script` | multiLine | Conditional | - | Inline C# code (when scriptType=inline) |
-| `scriptPath` | filePath | Conditional | - | Path to .cs file (when scriptType=filePath) |
+| `scriptType` | pickList | No | `inline` | Script type: `inline` or `filePath` |
+| `script` | multiLine | Conditional | - | Inline C# code (required when `scriptType` is `inline`) |
+| `scriptPath` | filePath | Conditional | - | Path to .cs file (required when `scriptType` is `filePath`) |
 | `arguments` | string | No | - | Command-line arguments passed to the script |
 | `environmentVariables` | multiLine | No | - | Environment variables (NAME=value, one per line) |
 | `workingDirectory` | filePath | No | `$(System.DefaultWorkingDirectory)` | Working directory for execution |
