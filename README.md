@@ -18,7 +18,7 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 
 ## Installation
 
-1. Install the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com)
+1. Install the extension from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=JacobBundgaard.run-inline-csharp)
 2. The task will be available as "Run Inline C#" in your pipeline editor
 
 ## Usage
