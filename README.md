@@ -29,7 +29,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 - task: RunInlineCSharp@1
   displayName: 'Run C# Script'
   inputs:
-    scriptType: 'inline'
     script: |
       Console.WriteLine("Hello from inline C#!");
       var numbers = Enumerable.Range(1, 10);
@@ -52,7 +51,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 ```yaml
 - task: RunInlineCSharp@1
   inputs:
-    scriptType: 'inline'
     script: |
       #:package Newtonsoft.Json@13.0.3
 
@@ -67,7 +65,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 ```yaml
 - task: RunInlineCSharp@1
   inputs:
-    scriptType: 'inline'
     script: |
       var apiKey = Environment.GetEnvironmentVariable("API_KEY");
       Console.WriteLine($"Using API key: {apiKey?.Substring(0, 4)}...");
@@ -81,7 +78,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 ```yaml
 - task: RunInlineCSharp@1
   inputs:
-    scriptType: 'inline'
     script: |
       foreach (var arg in args)
       {
@@ -110,7 +106,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 - task: RunInlineCSharp@1
   displayName: 'Bump Version'
   inputs:
-    scriptType: 'inline'
     script: |
       var versionFile = "version.txt";
       var currentVersion = File.ReadAllText(versionFile).Trim();
@@ -127,7 +122,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 - task: RunInlineCSharp@1
   displayName: 'Check API Health'
   inputs:
-    scriptType: 'inline'
     script: |
       using var client = new HttpClient();
       var response = await client.GetAsync("https://api.example.com/health");
@@ -145,7 +139,6 @@ Run C# code directly in your Azure DevOps pipeline using .NET 10's file-based pr
 - task: RunInlineCSharp@1
   displayName: 'Process CSV Data'
   inputs:
-    scriptType: 'inline'
     script: |
       #:package CsvHelper@30.0.1
 
