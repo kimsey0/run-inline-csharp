@@ -1,6 +1,6 @@
 {
   "name": "run-inline-csharp-extension",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Azure DevOps extension for running inline C# code",
   "scripts": {
     "build": "cd runInlineCSharpTask && npm install && npm run build",
@@ -13,7 +13,7 @@
     "csharp",
     "dotnet"
   ],
-  "author": "Your Name",
+  "author": "Jacob Bundgaard",
   "license": "MIT",
   "devDependencies": {
     "tfx-cli": "^0.16.0"

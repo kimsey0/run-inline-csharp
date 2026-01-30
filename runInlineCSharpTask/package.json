@@ -1,6 +1,6 @@
 {
   "name": "run-inline-csharp-task",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Azure DevOps task for running inline C# code",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
     "csharp",
     "dotnet"
   ],
-  "author": "Your Name",
+  "author": "Jacob Bundgaard",
   "license": "MIT",
   "dependencies": {
     "azure-pipelines-task-lib": "^4.0.0"
