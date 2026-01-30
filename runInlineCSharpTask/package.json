@@ -1,6 +1,6 @@
 {
   "name": "run-inline-csharp-task",
-  "version": "1.0.1",
+  "version": "0.0.0-development",
   "description": "Azure DevOps task for running inline C# code",
   "main": "index.js",
   "scripts": {

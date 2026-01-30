@@ -1,6 +1,6 @@
 {
   "name": "run-inline-csharp-extension",
-  "version": "1.0.1",
+  "version": "0.0.0-development",
   "description": "Azure DevOps extension for running inline C# code",
   "scripts": {
     "build": "cd runInlineCSharpTask && npm install && npm run build",

@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "run-inline-csharp",
     "name": "Run Inline C#",
-    "version": "1.0.1",
+    "version": "0.0.0",
     "publisher": "JacobBundgaard",
     "targets": [
         {

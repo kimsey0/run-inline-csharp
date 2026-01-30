@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Get version from tag
+        id: version
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: Update task.json version
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          node -e "
+            const fs = require('fs');
+            const [major, minor, patch] = '$VERSION'.split('.').map(Number);
+            const taskPath = 'runInlineCSharpTask/task.json';
+            const task = JSON.parse(fs.readFileSync(taskPath));
+            task.version = { Major: major, Minor: minor, Patch: patch };
+            fs.writeFileSync(taskPath, JSON.stringify(task, null, 4));
+          "
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Build task
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Package extension
+        run: |
+          npx tfx extension create --manifest-globs vss-extension.json \
+            --override '{"version": "${{ steps.version.outputs.version }}"}'
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: JacobBundgaard.run-inline-csharp-${{ steps.version.outputs.version }}.vsix
+          generate_release_notes: true
+
+      - name: Publish to Azure DevOps Marketplace
+        if: env.AZURE_DEVOPS_PAT != ''
+        run: npx tfx extension publish --vsix JacobBundgaard.run-inline-csharp-${{ steps.version.outputs.version }}.vsix --token $AZURE_DEVOPS_PAT
