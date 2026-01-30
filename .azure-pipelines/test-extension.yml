@@ -2,6 +2,11 @@ trigger:
   - master
   - main
 
+resources:
+  extensions:
+    - extension: run-inline-csharp
+      publisher: JacobBundgaard
+
 stages:
   - stage: Test
     displayName: 'Test RunInlineCSharp Task'
